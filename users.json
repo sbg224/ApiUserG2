@@ -5,5 +5,47 @@
     "age": "22",
     "email": "sambah450@gmail.com",
     "password": "$2b$10$x5nSwEMM18figC.wHH7Wu.lxXvqhchhupfLd8ZNNSlUQQocOfcm5W"
+  },
+  {
+    "id": 2,
+    "name": "Paul",
+    "age": "34",
+    "email": "sambah450@gmail.com",
+    "password": "$2b$10$XLNl2yXa6Gs3.zi76y417ubtt5vg7gzz9Hq1Pn4uneYctHEjotVAG"
+  },
+  {
+    "id": 3,
+    "name": "Diallo",
+    "age": "21",
+    "email": "sambah450@gmail.com",
+    "password": "$2b$10$bZUIjFQ35ptx3jM58yUm/.ZYP0v38cqRP1bprDSUHcWm/9k1MaWJa"
+  },
+  {
+    "id": 4,
+    "name": "NGOUENENANE MARIAM",
+    "age": "21",
+    "email": "ngouenenanesalem@gmail.com",
+    "password": "$2b$10$RyWlKQ6QXc2QgdTfPdOF5.KmNczLJ4TBIRGcC87TKeTfx58cJ41l6"
+  },
+  {
+    "id": 5,
+    "name": "Luigi",
+    "age": "31",
+    "email": "luigi.rondeau@gmail.com",
+    "password": "$2b$10$FhrNTqDZoSCMI5tsBF0Pxu29jY8eFAJqObui.DTqtjRPLkFYGnAKu"
+  },
+  {
+    "id": 6,
+    "name": "William",
+    "age": "19",
+    "email": "williamlegal5@gmail.com",
+    "password": "$2b$10$LKZstENciefaW6tXJgURB.IFSJh5mw8gzJ5FAS8M8ijQdbNaZ9dyG"
+  },
+  {
+    "id": 7,
+    "name": "Mattia",
+    "age": "30",
+    "email": "mattia.bouvier@protonmail.com",
+    "password": "$2b$10$eX8Yskrh8GCFq6ToCn.niuY.dvppN1c6j6uOPW0bhZiGWX6qdJJLm"
   }
 ]

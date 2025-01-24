@@ -41,12 +41,31 @@ const saveUsersToFile = (users) => {
 };
 
 // Route pour récupérer la liste des utilisateurs (facultatif)
-app.get('/users', (req, res) => {
-  const users = readUsersFromFile();
-  res.status(200).json(users);
+//http://localhost:5454/users
+// app.get('/users/', (req, res) => {
+//   const users = readUsersFromFile();
+//   res.status(200).json(users);
+// });
+
+app.get('/users/:id', (req, res) => {
+  try {
+    const { id } = req.params;
+    const users = readUsersFromFile(); // Lire les données depuis le fichier
+    const user = users.find((u) => u.id === Number(id)); // Recherche de l'utilisateur
+
+    if (!user) {
+      return res.status(404).json({ error: "Utilisateur non trouvé" });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.error("Erreur lors de la récupération de l'utilisateur :", error);
+    res.status(500).json({ error: "Erreur interne du serveur" });
+  }
 });
 
 // Exemple côté serveur (Express)
+//http://localhost:5454/users
 app.post('/users', async (req, res) => {
   try {
     const newUser = req.body;
@@ -84,6 +103,7 @@ app.post('/users', async (req, res) => {
 });
 
 // Route pour vérifier si l'utilisateur existe
+  //http://localhost:5454/verify-user
 app.post('/verify-user', async (req, res) => {
   const { email, password } = req.body;
 
@@ -102,7 +122,7 @@ app.post('/verify-user', async (req, res) => {
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (isPasswordValid) {
-      return res.json({ exists: true });
+      return res.json({ exists: true, id: user.id }); // Ajoute l'ID dans la réponse
     // biome-ignore lint/style/noUselessElse: <explanation>
     } else {
       return res.json({ exists: false });
