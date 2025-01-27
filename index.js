@@ -191,6 +191,19 @@ app.post('/contact', async (req, res) => {
   }
 });
 
+app.get('/contact', async (req, res) => {
+
+  try {
+
+    const result = readContactFromFile()
+    return res.status(200).json(result);
+
+  } catch (error) {
+    console.error('Erreur lors de la vérification de l\'utilisateur:', error);
+    return res.status(500).json({ message: 'Erreur interne du serveur' });
+  }
+});
+
 const port = process.env.PORT || 5454;
 
 app.listen(port, '0.0.0.0', () => {
