@@ -133,8 +133,8 @@ app.post('/verify-user', async (req, res) => {
   }
 });
 
-const port = 5454;
+const port = process.env.PORT || 5454; 
 
 app.listen(port, '0.0.0.0', () => {
-  console.log(`Example app listening on http://0.0.0.0:${port}`);
+  console.log(`Server running on port ${port}`);
 });
