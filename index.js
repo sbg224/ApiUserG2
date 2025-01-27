@@ -16,6 +16,7 @@ const pub = path.join(process.cwd(), "public");
 
 // Chemin vers le fichier contenant les utilisateurs
 const usersFilePath = path.join(process.cwd(), 'users.json');
+const contactFilePath = path.join(process.cwd(), 'contact.json');
 
 // Lire les données des utilisateurs depuis le fichier
 const readUsersFromFile = () => {
@@ -39,6 +40,29 @@ const saveUsersToFile = (users) => {
     console.error('Erreur lors de l\'écriture dans le fichier :', error);
   }
 };
+
+const readContactFromFile = () => {
+  try {
+    if (fs.existsSync(contactFilePath)) {
+      const data = fs.readFileSync(contactFilePath, 'utf-8');
+      return JSON.parse(data);
+    }
+    return []; // Retourne un tableau vide si le fichier n'existe pas
+  } catch (error) {
+    console.error('Erreur lors de la lecture du fichier :', error);
+    return []; // Retourner un tableau vide en cas d'erreur de lecture
+  }
+};
+
+const saveContactToFile = (contact) => {
+  try {
+    fs.writeFileSync(contactFilePath, JSON.stringify(contact, null, 2), 'utf-8');
+  } catch (error) {
+    console.error('Erreur lors de l\'écriture dans le fichier :', error);
+  }
+};
+
+
 
 // Route pour récupérer la liste des utilisateurs (facultatif)
 //http://localhost:5454/users
@@ -127,6 +151,40 @@ app.post('/verify-user', async (req, res) => {
     } else {
       return res.json({ exists: false });
     }
+  } catch (error) {
+    console.error('Erreur lors de la vérification de l\'utilisateur:', error);
+    return res.status(500).json({ message: 'Erreur interne du serveur' });
+  }
+});
+
+app.post('/contact', async (req, res) => {
+
+  try {
+    const newMessage = req.body;
+
+    // Validation des données
+    if (!newMessage.nom || !newMessage.prenom || !newMessage.email || !newMessage.dateNaissance || !newMessage.sujet || !newMessage.message) {
+      return res.status(400).json({ message: "Tous les champs (name, age, email, password) sont requis" });
+    }
+
+    const contact = readContactFromFile();  // Charger les utilisateurs existants
+
+    // Générer un ID unique pour l'utilisateur
+    const newId = contact.length > 0 ? contact[contact.length - 1].id + 1 : 1;
+
+    const contactToAdd = { id: newId, ...newMessage };
+
+    // Ajouter le message au tableau
+    contact.push(contactToAdd);
+
+    // Sauvegarder les messages dans le fichier
+    saveContactToFile(contact);
+
+    res.status(201).json({
+      message: "Message ajouté avec succès",
+      user: contactToAdd,
+    });
+
   } catch (error) {
     console.error('Erreur lors de la vérification de l\'utilisateur:', error);
     return res.status(500).json({ message: 'Erreur interne du serveur' });

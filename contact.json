@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "nom": "Saussereau",
+    "prenom": "Arthur",
+    "email": "arthur.saussereau@hotmail.fr",
+    "dateNaissance": "2024-12-30",
+    "sujet": "test1",
+    "message": "aaa"
+  }
+]
