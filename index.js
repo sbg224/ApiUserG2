@@ -191,8 +191,8 @@ app.post('/contact', async (req, res) => {
   }
 });
 
-const port = 5454;
+const port = process.env.PORT || 5454;
 
-app.listen(port, 'localhost', () => {
-  console.log(`API écoute sur http://localhost:${port}`);
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Server running on port ${port}`);
 });
