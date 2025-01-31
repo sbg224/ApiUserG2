@@ -99,8 +99,13 @@ app.post('/users', async (req, res) => {
       return res.status(400).json({ message: "Tous les champs (name, age, email, password) sont requis" });
     }
 
+
     const users = readUsersFromFile();  // Charger les utilisateurs existants
 
+    const user = users.find(u => u.email === newUser.email);
+    if(user) {
+      return res.status(400).json({ message: "Vous avez déja un compte" });
+    }
     // Générer un ID unique pour l'utilisateur
     const newId = users.length > 0 ? users[users.length - 1].id + 1 : 1;
 
